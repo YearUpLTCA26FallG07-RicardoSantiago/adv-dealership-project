@@ -3,6 +3,7 @@ package com.pluralsight;
 import com.dealership.Vehicle;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class SalesContract extends Contract {
 
@@ -45,6 +46,28 @@ public class SalesContract extends Contract {
 
     @Override
     public BigDecimal getMonthlyPayment() {
-        return null;
+
+
+        if (!finance) {
+            return BigDecimal.ZERO;
+        }
+
+        BigDecimal totalPrice = getTotalPrice();
+        BigDecimal interestRate;
+        int loanLength = 0;
+
+        if (getVehicleSold().getPrice().compareTo(new BigDecimal("10000")) >= 0) {
+            interestRate = new BigDecimal("0.0425");
+            loanLength = 48;
+        } else {
+            interestRate = new BigDecimal("0.0525");
+            loanLength = 24;
+        }
+
+        BigDecimal interestAmount = totalPrice.multiply(interestRate);
+
+        BigDecimal amountFinanced = totalPrice.add(interestAmount);
+
+        BigDecimal monthlyPayment = amountFinanced.divide(new BigDecimal(loanLength), );
     }
 }
