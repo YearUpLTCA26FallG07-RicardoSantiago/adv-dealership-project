@@ -68,6 +68,8 @@ public class SalesContract extends Contract {
 
         BigDecimal amountFinanced = totalPrice.add(interestAmount);
 
-        BigDecimal monthlyPayment = amountFinanced.divide(new BigDecimal(loanLength), );
+        BigDecimal monthlyPayment = amountFinanced.divide(new BigDecimal(loanLength), 2, RoundingMode.HALF_UP);
+
+        return monthlyPayment;
     }
 }
