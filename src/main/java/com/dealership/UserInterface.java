@@ -65,6 +65,8 @@ public class UserInterface {
                 case 7 -> processGetAllVehiclesRequest();
                 case 8 -> processAddVehicleRequest();
                 case 9 -> processRemoveVehicleRequest();
+                //case 10 ->
+                //case 11 ->
                 case 99 -> System.out.println("Have a nice day");
                 default -> System.out.println("Invalid input, please use one of the inputs listed");
 

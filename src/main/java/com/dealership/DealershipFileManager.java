@@ -11,7 +11,7 @@ public class DealershipFileManager {
     //Reader for inventory file
     public Dealership getDealership(){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("inventory.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/inventory.csv"));
 
             //Reading the file and naming the parts
             String dealershipname = reader.readLine();
