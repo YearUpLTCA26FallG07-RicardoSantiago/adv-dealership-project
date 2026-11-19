@@ -41,8 +41,7 @@ public class UserInterface {
            *  [7]  Display All Vehicles                            *
            *  [8]  Add a Vehicle                                   *
            *  [9]  Remove a Vehicle                                *
-           *  [10] Buy a Vehicle                                   *
-           *  [11] Lease a Vehicle                                 *
+           *  [10] Create a contract                               *
            *                                                       *
            *********************************************************
            *                                                       *
@@ -65,8 +64,7 @@ public class UserInterface {
                 case 7 -> processGetAllVehiclesRequest();
                 case 8 -> processAddVehicleRequest();
                 case 9 -> processRemoveVehicleRequest();
-                //case 10 ->
-                //case 11 ->
+                case 10 -> processContractRequest();
                 case 99 -> System.out.println("Have a nice day");
                 default -> System.out.println("Invalid input, please use one of the inputs listed");
 
@@ -178,5 +176,26 @@ public class UserInterface {
 
 
         }
+    }
+
+    public void processContractRequest() {
+
+        int choice = Console.promptForInt("Select a contract option: ");
+
+        switch(choice) {
+
+            case 1 -> createSalesContract();
+
+            case 2 -> createLeaseContract();
+
+            default -> System.out.println("Please enter 1 or 2");
+        }
+    }
+
+    public void createSalesContract() {
+
+        int vin = Console.promptForInt("Enter the VIN: ");
+
+        Vehicle vehicle = dealership.
     }
 }
