@@ -1,5 +1,7 @@
 package com.dealership;
 
+import com.pluralsight.SalesContract;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -182,13 +184,21 @@ public class UserInterface {
 
     public void processContractRequest() {
 
+        System.out.println("""
+           *********************************************************
+           *                  CONTRACT OPTIONS                     *
+           *********************************************************
+           [1] Sales Contract
+           [2] Lease Contract
+           """);
+
         int choice = Console.promptForInt("Select a contract option: ");
 
         switch(choice) {
 
             case 1 -> createSalesContract();
 
-            case 2 -> createLeaseContract();
+           // case 2 -> createLeaseContract();
 
             default -> System.out.println("Please enter 1 or 2");
         }
@@ -198,6 +208,34 @@ public class UserInterface {
 
         int vin = Console.promptForInt("Enter the VIN: ");
 
-        Vehicle vehicle = dealership.
+        Vehicle vehicle = dealership.getVehicleByVin(vin);
+
+        if (vehicle == null) {
+            System.out.println("No vehicle found");
+            return;
+        }
+
+        String date = Console.promptForString("Enter the contract date (MM/DD/YYYY: ");
+
+        String customerName = Console.promptForString("Enter the name: ");
+
+        String CustomerEmail = Console.promptForString("Enter the Email: ");
+
+        System.out.println("""
+                               Financing Options
+                               1. Finance Vehicle
+                               2. Pay In Full
+                               """);
+        int financeOption = Console.promptForInt("Select and option: ");
+
+        boolean finance = financeOption == 1;
+
+        SalesContract contract = new SalesContract(date,customerName,CustomerEmail,vehicle,finance);
+
+        System.out.println("Sales Contract Created");
+        System.out.println("Total Price: $" + contract.getTotalPrice());
+        System.out.println("Monthly Payment: $" + contract.getMonthlyPayment());
+
+
     }
 }
