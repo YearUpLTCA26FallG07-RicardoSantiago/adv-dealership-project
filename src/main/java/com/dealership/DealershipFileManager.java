@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class DealershipFileManager {
 
@@ -56,6 +58,28 @@ public class DealershipFileManager {
     }
 
     public void saveDealership(Dealership dealership) {
+         // implementing the writer
+        try { BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/inventory.csv"));
+
+         // block to write to dealership and add new vehicle to csv file
+         writer.write(dealership.getName()+"|"+dealership.getAddress()+"|"+dealership.getPhone());
+
+         writer.newLine();
+
+         for (Vehicle vehicle : dealership.getAllVehicles()) {
+             writer.write(
+                     vehicle.getVin() + "|" +
+                             vehicle.getYear() + "|" +
+                             vehicle.getMake() + "|" +
+                             vehicle.getModel() + "|" +
+                             vehicle.getVehicleType() + "|" +
+                             vehicle.getColor() + "|" +
+                             vehicle.getOdometer() + "|" +
+                             vehicle.getPrice());
+             writer.newLine();
+         }
+             writer.close();
+        } catch (IOException e) {e.printStackTrace(); }
 
     }
 }

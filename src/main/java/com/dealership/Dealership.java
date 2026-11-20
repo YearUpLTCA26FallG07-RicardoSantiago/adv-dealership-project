@@ -155,6 +155,10 @@ public class Dealership {
         return matchingVehicles;
     }
 
+    public Vehicle getVehicleByVin(int vin) {
+
+    }
+
 
 
 }
