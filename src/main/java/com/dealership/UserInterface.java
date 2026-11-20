@@ -1,5 +1,6 @@
 package com.dealership;
 
+import com.pluralsight.LeaseContract;
 import com.pluralsight.SalesContract;
 
 import java.math.BigDecimal;
@@ -219,7 +220,7 @@ public class UserInterface {
 
         String customerName = Console.promptForString("Enter the name: ");
 
-        String CustomerEmail = Console.promptForString("Enter the Email: ");
+        String customerEmail = Console.promptForString("Enter the Email: ");
 
         System.out.println("""
                                Financing Options
@@ -230,12 +231,36 @@ public class UserInterface {
 
         boolean finance = financeOption == 1;
 
-        SalesContract contract = new SalesContract(date,customerName,CustomerEmail,vehicle,finance);
+        SalesContract contract = new SalesContract(date,customerName,customerEmail,vehicle,finance);
 
         System.out.println("Sales Contract Created");
         System.out.println("Total Price: $" + contract.getTotalPrice());
         System.out.println("Monthly Payment: $" + contract.getMonthlyPayment());
 
 
+    }
+
+    public void createLeaseContract() {
+
+        int vin = Console.promptForInt("Enter the VIN: ");
+
+        Vehicle vehicle = dealership.getVehicleByVin(vin);
+
+        if (vehicle == null) {
+            System.out.println("No vehicle found");
+            return;
+        }
+
+        String date = Console.promptForString("Enter the contract date (MM/DD/YYYY: ");
+
+        String customerName = Console.promptForString("Enter the name: ");
+
+        String customerEmail = Console.promptForString("Enter the Email: ");
+
+        LeaseContract contract = new LeaseContract(date,customerName,customerEmail,vehicle);
+
+        System.out.println("Lease Contract Created");
+        System.out.println("Total Price: $" + contract.getTotalPrice());
+        System.out.println("Monthly Payment: $" + contract.getMonthlyPayment());
     }
 }

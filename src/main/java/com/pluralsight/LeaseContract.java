@@ -3,6 +3,7 @@ package com.pluralsight;
 import com.dealership.Vehicle;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class LeaseContract extends Contract {
 
@@ -26,6 +27,15 @@ public class LeaseContract extends Contract {
 
     @Override
     public BigDecimal getMonthlyPayment() {
-        return null;
+
+        BigDecimal totalprice = getTotalPrice();
+
+        BigDecimal interestAmount = totalprice.multiply(new BigDecimal("0.04"));
+
+        BigDecimal amountFinanced = totalprice.add(interestAmount);
+
+        BigDecimal monthlyPayment = amountFinanced.divide(new BigDecimal("36"), 2, RoundingMode.HALF_UP);
+
+        return monthlyPayment;
     }
 }
